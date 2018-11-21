@@ -255,7 +255,7 @@ class View {
 class Model {
 
   constructor(view) {
-    this._url = "../../../ajax_backend/churches_backend.php"; // URL of the php webpage
+    this._url = "../resources/ajax_backend/churches_backend.php"; // URL of the php webpage
     this._view = view; // view class object of mvc
     this._churches = null; // churches arr
     this._people = null; // people arr

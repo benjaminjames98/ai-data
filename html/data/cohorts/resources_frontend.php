@@ -14,15 +14,15 @@ if (!permission_check($mysqli, 'per_education')) {
   <meta content='text/html; charset=UTF-8'/>
   <title>Resources</title>
   <script src='resources.js'></script>
-  <link rel='stylesheet' href='../../../styles/w3.css'>
-  <link rel='stylesheet' href='../../../styles/w3-theme-red.css'>
+  <link rel='stylesheet' href='../resources/styles/w3.css'>
+  <link rel='stylesheet' href='../resources/styles/w3-theme-red.css'>
 </head>
 <body>
 
 <!-- Sidebar -->
 <nav class='w3-sidebar w3-bar-block w3-border-right w3-card' style='display:none' id='sidebar'>
   <img style='width: 200px; height: 100px' class='w3-bar-item w3-image' alt='citynetworks logo'
-       src='../../../media/city_networks_logo.png'/>
+       src='../resources/media/city_networks_logo.png'/>
   <button onclick="_close('sidebar');" class='w3-bar-item w3-button w3-large'>Close &times;</button>
   <a href='finance_frontend.php' class='w3-bar-item w3-button'>Finance</a>
   <a href='education_frontend.php' class='w3-bar-item w3-button'>Education</a>

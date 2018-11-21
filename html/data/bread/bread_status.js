@@ -1,4 +1,4 @@
-var _URL = "../../../ajax_backend/bread_status_backend.php";
+var _URL = "../resources/ajax_backend/bread_status_backend.php";
 var _interval;
 var _region;
 

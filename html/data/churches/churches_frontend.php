@@ -16,11 +16,11 @@ if (!permission_check($mysqli, 'per_churches')) {
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css'
       integrity='sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp'
       crossorigin='anonymous'>
-  <link rel='stylesheet' href='../../../styles/w3-theme-green.css'>
-  <link rel='stylesheet' href='../../../styles/w3.css'>
+  <link rel='stylesheet' href='../resources/styles/w3-theme-green.css'>
+  <link rel='stylesheet' href='../resources/styles/w3.css'>
   <link rel='stylesheet' href='churches.css'>
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-  <script src='../../../js/utils.js'></script>
+  <script src='../resources/js/utils.js'></script>
   <script src='churches.js'></script>
 </head>
 <body class='w3-theme'>

@@ -13,8 +13,8 @@ if (!permission_check($mysqli, 'per_bread')) {
 <head>
   <meta charset='UTF-8'>
   <title>Bread Delivery Status</title>
-  <link rel='stylesheet' href='../../../styles/w3.css'>
-  <link rel='stylesheet' href='../../../styles/w3-theme-red.css'>
+  <link rel='stylesheet' href='../resources/styles/w3.css'>
+  <link rel='stylesheet' href='../resources/styles/w3-theme-red.css'>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src='bread_status.js'></script>
 </head>

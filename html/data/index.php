@@ -14,11 +14,11 @@ if (login_check($mysqli)) {
   <title>Secure Login: Log In</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=width, initial-scale=1">
-  <link rel="stylesheet" href="../../styles/w3.css"/>
-  <link rel="stylesheet" href="../../styles/w3-theme-green.css"/>
-  <link rel="stylesheet" href="../../styles/main.css"/>
-  <script type="text/JavaScript" src="../../js/sha512.js"></script>
-  <script type="text/JavaScript" src="../../js/forms.js"></script>
+  <link rel="stylesheet" href="resources/styles/w3.css"/>
+  <link rel="stylesheet" href="resources/styles/w3-theme-green.css"/>
+  <link rel="stylesheet" href="resources/styles/main.css"/>
+  <script type="text/JavaScript" src="resources/js/sha512.js"></script>
+  <script type="text/JavaScript" src="resources/js/forms.js"></script>
   <style>
     @media (max-width: 336px) {
       #login-card {
@@ -47,7 +47,7 @@ if (login_check($mysqli)) {
   </header>
   <div class="w3-container w3-white">
     <div class="w3-panel">
-      <form action="../../includes/login_process.php" method="post" name="login_form">
+      <form action="resources/ajax_backend/login_process.php" method="post" name="login_form">
         <div class="w3-panel">
           <label>Email:</label>
           <input class="w3-input w3-border-bottom w3-border-green" type="text" name="email"/>

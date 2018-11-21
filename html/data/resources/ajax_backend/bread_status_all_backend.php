@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
 
-require "../includes/db_connect.php";
+require "../../../../includes/db_connect.php";
 
 function throwError($msg = null) {
   echo json_encode(["a" => "0", "msg" => "error in: " . $msg]);

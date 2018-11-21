@@ -19,12 +19,12 @@ if (!permission_check($mysqli, $PAGE_TYPE)) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-  <link rel="stylesheet" href="../../../styles/main.css">
-  <link rel="stylesheet" href="../../../styles/w3.css">
-  <script type="text/JavaScript" src="../../../js/sha512.js"></script>
-  <script type="text/JavaScript" src="../../../js/utils.js"></script>
-  <script type="text/JavaScript" src="../../../js/route_list_controller.js"></script>
-  <script> const PAGE_RECONCILER = '../'; </script>
+  <link rel="stylesheet" href="../resources/styles/main.css">
+  <link rel="stylesheet" href="../resources/styles/w3.css">
+  <script type="text/JavaScript" src="../resources/js/sha512.js"></script>
+  <script type="text/JavaScript" src="../resources/js/utils.js"></script>
+  <script type="text/JavaScript" src="../resources/js/route_list_controller.js"></script>
+  <script> const PAGE_RECONCILER = '<?php echo $PAGE_RECONCILER ?>'; </script>
 </head>
 <body class="w3-light-grey">
 
@@ -58,8 +58,8 @@ if (!permission_check($mysqli, $PAGE_TYPE)) {
 
 <script>
   window.onload = function () {
-    RouteListController('<?= htmlentities($_SESSION['username']) ?>', $('church_container'),
-      $('fill_participating'), $('fil_route'));
+    RouteListController('<?= htmlentities($_SESSION['username']) ?>', el('church_container'),
+      el('fill_participating'), el('fil_route'));
   }
 </script>
 

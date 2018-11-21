@@ -25,7 +25,7 @@ function _close(id) {
 
 /*---- Miscellaneous ----*/
 
-var _URL = "../../../ajax_backend/finance_backend.php?";
+var _URL = "../resources/ajax_backend/finance_backend.php?";
 
 window.onload = function () {
   initPage();

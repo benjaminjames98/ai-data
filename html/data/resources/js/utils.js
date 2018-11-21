@@ -31,4 +31,4 @@ function jsonPost(url, obj, fun) {
   xmlhttp.send(par);
 }
 
-function $(a) { return document.getElementById(a); }
+function el(a) { return document.getElementById(a); }

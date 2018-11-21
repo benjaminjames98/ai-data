@@ -1,5 +1,5 @@
 <?php
-include_once '../includes/db_connect.php';
+include_once '../../../../includes/db_connect.php';
 
 function throwError($msg = '') {
   die(json_encode(["a" => "0", "msg" => "error in: " . $msg]));

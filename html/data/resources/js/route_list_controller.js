@@ -5,7 +5,7 @@
  * @param rou_el select element used for filtering by route
  */
 const RouteListController = function (user, list_el, par_el, rou_el) {
-  const _ROUTE_LIST_URL = PAGE_RECONCILER + "../../ajax_backend/route_list_controller.php";
+  const _ROUTE_LIST_URL = PAGE_RECONCILER + "resources/ajax_backend/route_list_controller.php";
   let region = [];
   // TODO load churches
   // TODO create list elements

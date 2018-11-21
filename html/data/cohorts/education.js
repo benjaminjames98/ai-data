@@ -1,4 +1,4 @@
-var _URL = "../../../ajax_backend/education_backend.php?";
+var _URL = "../resources/ajax_backend/education_backend.php?";
 
 function _open(id) {
   document.getElementById(id).style.display = "block";

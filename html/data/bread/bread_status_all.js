@@ -1,4 +1,4 @@
-var _URL = "../../../ajax_backend/bread_status_all_backend.php";
+var _URL = "../resources/ajax_backend/bread_status_all_backend.php";
 
 $(document).ready(function () {
   readRegions();

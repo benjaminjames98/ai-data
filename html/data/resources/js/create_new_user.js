@@ -1,10 +1,10 @@
 function $(a) { return document.getElementById(a); }
 
 function createNewUser() {
-  const _NEW_USER_URL = "../../ajax_backend/create_new_user.php";
+  const _NEW_USER_URL = PAGE_RECONCILER + "../ajax_backend/create_new_user.php";
   
-  let user = userFactory($("new_username"), $("new_email"),
-    $("new_password"), $("new_confirmpwd"));
+  let user = userFactory(el("new_username"), el("new_email"),
+    el("new_password"), el("new_confirmpwd"));
 
   if (user.isValid()) jsonPost(_NEW_USER_URL, user.getRegoObj(),
     function (obj) {
@@ -26,7 +26,7 @@ const userFactory = function (uid_el, eml_el, pw_el, conf_el) {
     let re1 = /^\w+$/;
     let re2 = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
     let msg = "";
-    if (uid == "" || eml == "" || pw == "" || conf == "") {
+    if (uid === "" || eml === "" || pw === "" || conf === "") {
       msg = "You must provide all the requested details. Please try again";
     } else if (!re1.test(uid)) {
       msg = "Username must contain only letters, numbers and underscores. Please try again";

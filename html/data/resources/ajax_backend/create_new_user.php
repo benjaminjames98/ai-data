@@ -1,5 +1,5 @@
 <?php
-include_once '../includes/db_connect.php';
+include_once '../../../../includes/db_connect.php';
 
 $user = json_decode($_REQUEST['user']);
 $username = $user->username;

@@ -1,5 +1,5 @@
 const UserPermissionController = function (select_el, container_el, button_el) {
-  const _EDIT_PER_URL = "../../ajax_backend/user_permission_controller.php";
+  const _EDIT_PER_URL =  PAGE_RECONCILER + "resources/ajax_backend/user_permission_controller.php";
   let username = '';
 
   function loadUsernames() {

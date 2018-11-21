@@ -1,5 +1,5 @@
 <?php
-include_once 'login_functions.php';
+include_once '../../../../includes/login_functions.php';
 sec_session_start();
 
 // Unset all session values
@@ -18,4 +18,4 @@ setcookie(session_name(),
 
 // Destroy session
 session_destroy();
-header('Location: ../www/data/index.php');
+header('Location: ../../index.php');

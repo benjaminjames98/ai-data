@@ -69,7 +69,7 @@ $PAGE_RECONCILER = isset($PAGE_RECONCILER) ? $PAGE_RECONCILER : '';
         <i class="fas fa-cookie-bite fa-fw"></i> Bread - Regional</a>
     <?php endif; ?>
     <hr>
-    <a href="<?= $PAGE_RECONCILER ?>../../includes/login_logout.php" class="w3-bar-item w3-button w3-padding">
+    <a href="<?= $PAGE_RECONCILER ?>resources/ajax_backend/login_logout.php" class="w3-bar-item w3-button w3-padding">
       <i class="fas fa-sign-out-alt fa-fw"></i> Logout</a>
     <br><br>
   </div>
