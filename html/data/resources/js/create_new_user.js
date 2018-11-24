@@ -1,5 +1,3 @@
-function $(a) { return document.getElementById(a); }
-
 function createNewUser() {
   const _NEW_USER_URL = PAGE_RECONCILER + '../ajax_backend/create_new_user.php';
 
