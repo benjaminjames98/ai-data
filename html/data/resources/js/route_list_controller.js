@@ -4,15 +4,16 @@
  * @param par_el select element used for filtering by participation
  * @param rou_el select element used for filtering by route
  */
-const RouteListController = function (user, list_el, par_el, rou_el) {
-  const _ROUTE_LIST_URL = PAGE_RECONCILER + "resources/ajax_backend/route_list_controller.php";
+const RouteListController = function(user, list_el, par_el, rou_el) {
+  const _ROUTE_LIST_URL = PAGE_RECONCILER
+    + 'resources/ajax_backend/route_list_controller.php';
   let region = [];
   // TODO load churches
   // TODO create list elements
   // TODO attach listeners to filters
 
   function loadRegion() {
-    jsonPost(_ROUTE_LIST_URL, {q: "read_region", username: user}, (obj) => {
+    jsonPost(_ROUTE_LIST_URL, {q: 'read_region', username: user}, (obj) => {
       region = obj.region;
 
       refreshList();
@@ -28,12 +29,13 @@ const RouteListController = function (user, list_el, par_el, rou_el) {
 
 
   function clearList() {
-    list_el.innerHTML = "";
+    list_el.innerHTML = '';
   }
 
   function createElement(r, c) {
-    let li = document.createElement("LI");
-    li.className = "w3-row-padding w3-card w3-round-large w3-margin-top w3-white";
+    let li = document.createElement('LI');
+    li.className =
+      'w3-row-padding w3-card w3-round-large w3-margin-top w3-white';
     li.id = `church-${c.id}`;
     li.innerHTML += `
 <div class="w3-col l4 m12 s12">
@@ -66,7 +68,7 @@ const RouteListController = function (user, list_el, par_el, rou_el) {
     // route options
     let route_selector = li.querySelector(`#route-${c.id}`);
     for (const route of Object.values(region.routes)) {
-      let option = document.createElement("OPTION");
+      let option = document.createElement('OPTION');
       option.value = route.id;
       option.text = route.name;
       route_selector.appendChild(option);

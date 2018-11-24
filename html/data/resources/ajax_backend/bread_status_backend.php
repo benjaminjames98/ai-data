@@ -16,14 +16,14 @@ if ($db == -1) throwError();
 $q = null;
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
   $q = $_POST['q'];
-else if ($_SERVER['REQUEST_METHOD'] == 'GET')
+elseif ($_SERVER['REQUEST_METHOD'] == 'GET')
   $q = $_GET['q'];
 else throwError('Request Method');
 
 /*---- $q ----*/
 
 if ($q == 'read_regions') readRegions();
-else if ($q == 'read_routes') readRoutes();
+elseif ($q == 'read_routes') readRoutes();
 else throwError('End Script');
 
 function readRegions() {
@@ -45,7 +45,8 @@ function readRoutes() {
   global $db;
   $region = $_GET['region'];
 
-  $query = "SELECT __pk_id, name FROM route WHERE  `_fk_region` = ? ORDER BY `__pk_id`";
+  $query =
+    "SELECT __pk_id, name FROM route WHERE  `_fk_region` = ? ORDER BY `__pk_id`";
   if (!$result = $db->prepare($query)) throwError('read_routes');
   $result->bind_param('i', $region);
   $result->execute();

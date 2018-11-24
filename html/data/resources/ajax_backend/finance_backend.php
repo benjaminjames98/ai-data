@@ -16,34 +16,34 @@ if ($mysqli == -1) throwError();
 $q = null;
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
   $q = $_POST['q'];
-else if ($_SERVER['REQUEST_METHOD'] == 'GET')
+elseif ($_SERVER['REQUEST_METHOD'] == 'GET')
   $q = $_GET['q'];
 else throwError('Request Method');
 
 /*---- $q ----*/
 
 if ($q == 'pw_check') pwCheck();
-else if ($q == 'read_payments') readPayments();
-else if ($q == 'create_payment') createPayment();
-else if ($q == 'read_payment') readPayment();
-else if ($q == 'read_payees') readPayees();
-else if ($q == 'create_payee') createPayee();
-else if ($q == 'read_payee') readPayee();
-else if ($q == 'update_payee') updatePayee();
-else if ($q == 'read_students') readStudents();
-else if ($q == 'read_receipts') readReceipts();
-else if ($q == 'create_receipt') createReceipt();
-else if ($q == 'read_receipt') readReceipt();
-else if ($q == 'download_receipt') downloadReceipt();
-else if ($q == 'read_invoices') readInvoices();
-else if ($q == 'create_invoice') createInvoice();
-else if ($q == 'read_invoice') readInvoice();
-else if ($q == 'download_invoice') downloadInvoice();
-else if ($q == 'read_contacts') readContacts();
-else if ($q == 'create_contact') createContact();
-else if ($q == 'read_contact') readContact();
-else if ($q == 'update_contact') updateContact();
-else if ($q == 'delete_contact') deleteContact();
+elseif ($q == 'read_payments') readPayments();
+elseif ($q == 'create_payment') createPayment();
+elseif ($q == 'read_payment') readPayment();
+elseif ($q == 'read_payees') readPayees();
+elseif ($q == 'create_payee') createPayee();
+elseif ($q == 'read_payee') readPayee();
+elseif ($q == 'update_payee') updatePayee();
+elseif ($q == 'read_students') readStudents();
+elseif ($q == 'read_receipts') readReceipts();
+elseif ($q == 'create_receipt') createReceipt();
+elseif ($q == 'read_receipt') readReceipt();
+elseif ($q == 'download_receipt') downloadReceipt();
+elseif ($q == 'read_invoices') readInvoices();
+elseif ($q == 'create_invoice') createInvoice();
+elseif ($q == 'read_invoice') readInvoice();
+elseif ($q == 'download_invoice') downloadInvoice();
+elseif ($q == 'read_contacts') readContacts();
+elseif ($q == 'create_contact') createContact();
+elseif ($q == 'read_contact') readContact();
+elseif ($q == 'update_contact') updateContact();
+elseif ($q == 'delete_contact') deleteContact();
 else throwError('End Script');
 
 function pwCheck() {
@@ -63,7 +63,8 @@ function readPayments() {
   <tbody>
 HTML;
 
-  $query = "SELECT date_created, description, amount, __pk_id FROM payment ORDER BY `__pk_id` DESC";
+  $query =
+    "SELECT date_created, description, amount, __pk_id FROM payment ORDER BY `__pk_id` DESC";
   $result = $mysqli->query($query);
   if ($result->num_rows > 0)
     while ($row = $result->fetch_assoc()) {
@@ -86,7 +87,8 @@ function createPayment() {
   $des = $arr[0];
   $amt = $arr[1];
   $gst = $arr[2];
-  $query = "INSERT INTO payment (description, amount, gst, date_created) VALUES (?, ?, ?, CURDATE())";
+  $query =
+    "INSERT INTO payment (description, amount, gst, date_created) VALUES (?, ?, ?, CURDATE())";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("sss", $des, $amt, $gst);
   $stmt->execute();
@@ -98,7 +100,8 @@ function createPayment() {
 
 function readPayment() {
   global $mysqli;
-  $query = "SELECT __pk_id, date_created, description, amount, gst FROM payment WHERE __pk_id = ?";
+  $query =
+    "SELECT __pk_id, date_created, description, amount, gst FROM payment WHERE __pk_id = ?";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $_GET['id']);
   $stmt->execute();
@@ -107,7 +110,8 @@ function readPayment() {
   $stmt->fetch();
   $num = str_pad($num, 11, "0", STR_PAD_LEFT);
 
-  echo json_encode(['num' => $num, 'dat' => $dat, 'des' => $des, 'amt' => $amt, 'gst' => $gst]);
+  echo json_encode(['num' => $num, 'dat' => $dat, 'des' => $des, 'amt' => $amt,
+                    'gst' => $gst]);
   exit();
 }
 
@@ -138,7 +142,9 @@ MYSQL;
     while ($row = $result->fetch_assoc()) {
       $idStr = str_pad($row['id'], 4, "0", STR_PAD_LEFT);
       $html .= "<tr><td>{$idStr}</td><td>{$row['name']}</td>";
-      $html .= ($row['days'] > 30) ? "<td class='w3-text-red'>{$row['days']}</td>" : "<td>{$row['days']}</td>";
+      $html .= ($row['days'] > 30)
+        ? "<td class='w3-text-red'>{$row['days']}</td>"
+        : "<td>{$row['days']}</td>";
       $html .= "<td><button class='w3-button w3-padding-small w3-tiny' onclick=\"prepModal('mdl_pye_sdt', {$row['id']})\">&#x1F393</button></td>";
       $html .= "<td><button class='w3-button w3-padding-small w3-tiny' onclick=\"readPayee({$row['id']})\">&#9776</button></td></tr>";
     }
@@ -196,9 +202,11 @@ HTML;
   $add_crt = <<<HTML
 <button class='w3-btn w3-theme w3-right' onclick="createContact({$id}, 'add');">Create</button>
 HTML;
-  echo json_encode(['nam' => $nam, 'abn' => $abn, 'bal' => $bal, 'sav' => $sav, 'rct' => $rct, 'id' => $id,
-    'upd' => $upd, 'ref' => $ref, 'ivc' => $ivc, 'eml_crt' => $eml_crt, 'phn_crt' => $phn_crt,
-    'add_crt' => $add_crt]);
+  echo json_encode(['nam'     => $nam, 'abn' => $abn, 'bal' => $bal,
+                    'sav'     => $sav, 'rct' => $rct, 'id' => $id,
+                    'upd'     => $upd, 'ref' => $ref, 'ivc' => $ivc,
+                    'eml_crt' => $eml_crt, 'phn_crt' => $phn_crt,
+                    'add_crt' => $add_crt]);
   exit();
 }
 
@@ -228,7 +236,8 @@ function readStudents() {
   </thead>
   <tbody>
 HTML;
-  $query = "SELECT `__pk_id`, name FROM student WHERE `_fk_payee` = ? ORDER BY `__pk_id` ASC";
+  $query =
+    "SELECT `__pk_id`, name FROM student WHERE `_fk_payee` = ? ORDER BY `__pk_id` ASC";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $_GET['id']);
   $stmt->execute();
@@ -256,7 +265,8 @@ function readReceipts() {
   </thead>
   <tbody>
 HTML;
-  $query = "SELECT `__pk_id`, description, amount, date_created FROM receipt WHERE `_fk_payee` = ? ORDER BY `__pk_id` DESC";
+  $query =
+    "SELECT `__pk_id`, description, amount, date_created FROM receipt WHERE `_fk_payee` = ? ORDER BY `__pk_id` DESC";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $_GET['id']);
   $stmt->execute();
@@ -281,7 +291,8 @@ function createReceipt() {
   $des = $arr[1];
   $amt = $arr[2];
   $cor = ($arr[3] === 'yes') ? 1 : 0;
-  $query = "INSERT INTO receipt (`_fk_payee`, description, amount, correction, date_created) VALUES (?,?,?,?, CURDATE())";
+  $query =
+    "INSERT INTO receipt (`_fk_payee`, description, amount, correction, date_created) VALUES (?,?,?,?, CURDATE())";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("isdi", $pid, $des, $amt, $cor);
   $stmt->execute();
@@ -303,7 +314,8 @@ function createReceipt() {
 function readReceipt() {
   global $mysqli;
   $id = $_GET['id'];
-  $query = "SELECT `__pk_id`, date_created, description, amount, correction FROM receipt WHERE `__pk_id` = ?";
+  $query =
+    "SELECT `__pk_id`, date_created, description, amount, correction FROM receipt WHERE `__pk_id` = ?";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $id);
   $stmt->execute();
@@ -314,7 +326,8 @@ function readReceipt() {
   $dld = <<<HTML
 <button class='w3-btn w3-theme w3-right' onclick='downloadReceipt({$id})'>Download</button>
 HTML;
-  echo json_encode(['num' => $num, 'dat' => $dat, 'des' => $des, 'amt' => $amt, 'cor' => $cor, 'dld' => $dld]);
+  echo json_encode(['num' => $num, 'dat' => $dat, 'des' => $des, 'amt' => $amt,
+                    'cor' => $cor, 'dld' => $dld]);
   exit();
 }
 
@@ -367,7 +380,8 @@ MYSQL;
     while ($stmt->fetch()) {
       $idStr = str_pad($id, 11, "0", STR_PAD_LEFT);
       $html .= "<tr><td>{$idStr}</td><td>{$dat}</td>";
-      $html .= ($paid === '') ? "<td class='w3-text-theme''>{$due}</td>" : "<td>{$due}</td>";
+      $html .= ($paid === '') ? "<td class='w3-text-theme''>{$due}</td>"
+        : "<td>{$due}</td>";
       $html .= "<td>{$amt}</td>";
       $html .= "<td><button class='w3-button w3-padding-small w3-tiny' onclick=\"prepModal('mdl_ivc_red',{$id});\">&#9776</button></td></tr>";
     }
@@ -389,7 +403,8 @@ function createInvoice() {
     $chgArr2[] = explode(">", $chg);
   }
   $stmt = null;
-  $query = "INSERT INTO invoice (`_fk_payee`, date_created, date_due) VALUES (?, CURDATE(), DATE_ADD(CURDATE(), INTERVAL ? DAY))";
+  $query =
+    "INSERT INTO invoice (`_fk_payee`, date_created, date_due) VALUES (?, CURDATE(), DATE_ADD(CURDATE(), INTERVAL ? DAY))";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("ii", $pid, $due);
   $stmt->execute();
@@ -397,7 +412,8 @@ function createInvoice() {
   if ($stmt->affected_rows === 0) throwError("create_receipt_1");
   else {
     $iid = $mysqli->insert_id;
-    $query = "INSERT INTO charge (`_fk_invoice`, description, quantity, amount, gst) VALUES (?,?,?,?,?)";
+    $query =
+      "INSERT INTO charge (`_fk_invoice`, description, quantity, amount, gst) VALUES (?,?,?,?,?)";
     $stmt = $mysqli->prepare($query);
     $ivcAmt = 0;
     $ivcGst = 0;
@@ -518,21 +534,26 @@ function createContact() {
   $stmt = null;
   $msg = null;
   if ($type === 'eml') {
-    $query = "INSERT INTO email (`_fk_payee`, email_address, type) VALUES (?, ?, 'payee')";
+    $query =
+      "INSERT INTO email (`_fk_payee`, email_address, type) VALUES (?, ?, 'payee')";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("ss", $id = $arr[1], $eml = $arr[2]);
     $msg = 'Email created: ' . $eml;
-  } else if ($type === 'phn') {
-    $query = "INSERT INTO phone (`_fk_payee`, phone_number, type) VALUES (?, ?, 'payee')";
+  } elseif ($type === 'phn') {
+    $query =
+      "INSERT INTO phone (`_fk_payee`, phone_number, type) VALUES (?, ?, 'payee')";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("ss", $id = $arr[1], $phn = $arr[2]);
     $msg = 'Phone created: ' . $phn;
-  } else if ($type === 'add') {
-    $query = "INSERT INTO address (`_fk_payee`, line_1, line_2, suburb, state, post_code, type) VALUES (?,?,?,?,?,?, 'payee')";
+  } elseif ($type === 'add') {
+    $query =
+      "INSERT INTO address (`_fk_payee`, line_1, line_2, suburb, state, post_code, type) VALUES (?,?,?,?,?,?, 'payee')";
     $stmt = $mysqli->prepare($query);
-    $stmt->bind_param("ssssss", $id = $arr[1], $ln1 = $arr[2], $ln2 = $arr[3], $sub = $arr[4],
+    $stmt->bind_param("ssssss", $id = $arr[1], $ln1 = $arr[2], $ln2 = $arr[3],
+      $sub = $arr[4],
       $stt = $arr[5], $pcd = $arr[6]);
-    $msg = 'Address created: ' . $ln1 . ", " . $ln2 . ", " . $sub . ", " . $stt . ", " . $pcd;
+    $msg = 'Address created: ' . $ln1 . ", " . $ln2 . ", " . $sub . ", " . $stt
+      . ", " . $pcd;
   }
   $stmt->execute();
   if ($stmt->affected_rows === 0) throwError("create_contact");
@@ -545,9 +566,12 @@ function readContact() {
   $type = $_GET['type'];
   $id = $_GET['id'];
   $query = '';
-  if ($type === 'eml') $query = "SELECT email_address, '', '', '', '', `_fk_payee` FROM email WHERE `__pk_id` = ?";
-  else if ($type === 'phn') $query = "SELECT phone_number, '', '', '', '', `_fk_payee` FROM phone WHERE `__pk_id` = ?";
-  else if ($type === 'add') $query = "SELECT line_1, line_2, suburb, state, post_code, `_fk_payee` FROM address WHERE `__pk_id` = ?";
+  if ($type === 'eml') $query =
+    "SELECT email_address, '', '', '', '', `_fk_payee` FROM email WHERE `__pk_id` = ?";
+  elseif ($type === 'phn') $query =
+    "SELECT phone_number, '', '', '', '', `_fk_payee` FROM phone WHERE `__pk_id` = ?";
+  elseif ($type === 'add') $query =
+    "SELECT line_1, line_2, suburb, state, post_code, `_fk_payee` FROM address WHERE `__pk_id` = ?";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $id);
   $stmt->execute();
@@ -557,7 +581,8 @@ function readContact() {
   $udt = <<<HTML
 <button class='w3-btn w3-theme w3-right' onclick="updateContact({$pid},{$id},'{$type}');">Update</button>
 HTML;
-  echo json_encode(['v0' => $v0, 'v1' => $v1, 'v2' => $v2, 'v3' => $v3, 'v4' => $v4, 'udt' => $udt]);
+  echo json_encode(['v0' => $v0, 'v1' => $v1, 'v2' => $v2, 'v3' => $v3,
+                    'v4' => $v4, 'udt' => $udt]);
   exit();
 }
 
@@ -572,17 +597,19 @@ function updateContact() {
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("si", $eml = $arr[2], $cid = $arr[1]);
     $msg = 'Email updated: ' . $eml;
-  } else if ($type === 'phn') {
+  } elseif ($type === 'phn') {
     $query = "UPDATE phone SET phone_number = ? WHERE `__pk_id` = ?";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("si", $phn = $arr[2], $cid = $arr[1]);
     $msg = 'Phone updated: ' . $phn;
-  } else if ($type === 'add') {
-    $query = "UPDATE address SET line_1 = ?,line_2 = ?,suburb = ?,state = ?,post_code = ? WHERE `__pk_id` = ?  ";
+  } elseif ($type === 'add') {
+    $query =
+      "UPDATE address SET line_1 = ?,line_2 = ?,suburb = ?,state = ?,post_code = ? WHERE `__pk_id` = ?  ";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("sssssi", $ln1 = $arr[2], $ln2 = $arr[3], $sub = $arr[4],
       $stt = $arr[5], $pcd = $arr[6], $cid = $arr[1]);
-    $msg = 'Address updated: ' . $ln1 . ", " . $ln2 . ", " . $sub . ", " . $stt . ", " . $pcd;
+    $msg = 'Address updated: ' . $ln1 . ", " . $ln2 . ", " . $sub . ", " . $stt
+      . ", " . $pcd;
   }
   $stmt->execute();
   if ($stmt->affected_rows === 0) throwError("update_contact");
@@ -596,8 +623,8 @@ function deleteContact() {
   $type = $arr[0];
   $query = null;
   if ($type === 'eml') $query = "DELETE FROM email WHERE `__pk_id` = ?";
-  else if ($type === 'phn') $query = "DELETE FROM phone WHERE `__pk_id` = ?";
-  else if ($type === 'add') $query = "DELETE FROM address WHERE `__pk_id` = ?";
+  elseif ($type === 'phn') $query = "DELETE FROM phone WHERE `__pk_id` = ?";
+  elseif ($type === 'add') $query = "DELETE FROM address WHERE `__pk_id` = ?";
   if (!isset($query)) throwError("delete_contact_1");
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $id = $arr[1]);
@@ -648,7 +675,8 @@ MYSQL;
   $stmt->fetch();
   if ($p_abn === '') $p_abn = '-';
 
-  $query = "SELECT line_1, line_2, suburb, state, post_code FROM address WHERE `_fk_payee` = ?;";
+  $query =
+    "SELECT line_1, line_2, suburb, state, post_code FROM address WHERE `_fk_payee` = ?;";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $pid);
   $stmt->execute();
@@ -756,7 +784,8 @@ HTML;
   $fileLocation = "../../../accounting_docs/rct" . $rddStr . ".html";
   file_put_contents($fileLocation, $html);
 
-  $query = "UPDATE receipt SET prev_owing = ?, total_owing = ? WHERE `__pk_id` = ?";
+  $query =
+    "UPDATE receipt SET prev_owing = ?, total_owing = ? WHERE `__pk_id` = ?";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("ddi", $prevOwedVal, $totalOwedVal, $rid);
   $stmt->execute();
@@ -783,7 +812,8 @@ MYSQL;
   $stmt->fetch();
   if ($p_abn === '') $p_abn = '-';
 
-  $query = "SELECT line_1, line_2, suburb, state, post_code FROM address WHERE `_fk_payee` = ?;";
+  $query =
+    "SELECT line_1, line_2, suburb, state, post_code FROM address WHERE `_fk_payee` = ?;";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $pid);
   $stmt->execute();
@@ -793,7 +823,8 @@ MYSQL;
   $addLine1 = ($ln2 == '') ? $ln1 : $ln1 . ', ' . $ln2;
   $addLine2 = $sub . ', ' . $stt . ', ' . $pcd;
 
-  $query = "SELECT description, quantity, amount, gst FROM charge WHERE `_fk_invoice` = ?";
+  $query =
+    "SELECT description, quantity, amount, gst FROM charge WHERE `_fk_invoice` = ?";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $iid);
   $stmt->execute();
@@ -920,7 +951,8 @@ SET amount = ?, gst = ?, prev_owing = ?, total_owing = ?
 WHERE `__pk_id` = ?
 MYSQL;
   $stmt = $mysqli->prepare($query);
-  $stmt->bind_param("ddddi", $subTotalVal, $gstTotalVal, $prevOwedVal, $totalOwedVal, $iid);
+  $stmt->bind_param("ddddi", $subTotalVal, $gstTotalVal, $prevOwedVal,
+    $totalOwedVal, $iid);
   $stmt->execute();
 
   $fileLocation = "../../../accounting_docs/ivc" . $iddStr . ".html";

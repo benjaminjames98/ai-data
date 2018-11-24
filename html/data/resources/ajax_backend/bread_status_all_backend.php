@@ -16,7 +16,7 @@ if ($db == -1) throwError();
 $q = null;
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
   $q = $_POST['q'];
-else if ($_SERVER['REQUEST_METHOD'] == 'GET')
+elseif ($_SERVER['REQUEST_METHOD'] == 'GET')
   $q = $_GET['q'];
 else throwError('Request Method');
 

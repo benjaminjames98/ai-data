@@ -16,7 +16,7 @@ if ($mysqli == -1) throwError();
 $q = null;
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
   $q = $_POST['q'];
-else if ($_SERVER['REQUEST_METHOD'] == 'GET')
+elseif ($_SERVER['REQUEST_METHOD'] == 'GET')
   $q = $_GET['q'];
 else throwError('Request Method');
 
@@ -50,7 +50,8 @@ function readBooks() {
   </thead>
   <tbody>
 HTML;
-  $query = "SELECT `__pk_id`,name, 'in use' AS 'use', stock, 'demand' AS demand, price FROM book ORDER BY `__pk_id` ASC";
+  $query =
+    "SELECT `__pk_id`,name, 'in use' AS 'use', stock, 'demand' AS demand, price FROM book ORDER BY `__pk_id` ASC";
   $result = $mysqli->query($query);
   if ($result->num_rows > 0)
     while ($row = $result->fetch_assoc()) {
@@ -80,7 +81,8 @@ function createBook() {
   $nam = $arr[0];
   $des = $arr[1];
   $prc = $arr[2];
-  $query = "INSERT INTO book (name, description, price, stock) VALUES (?, ?, ?, 0)";
+  $query =
+    "INSERT INTO book (name, description, price, stock) VALUES (?, ?, ?, 0)";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("sss", $nam, $des, $prc);
   $stmt->execute();
@@ -101,8 +103,10 @@ function readBook() {
   $stmt->store_result();
   $stmt->bind_result($nam, $des, $prc);
   $stmt->fetch();
-  $udt = "<button class='w3-btn w3-theme w3-right' onclick='updateBook({$id})'>Update</button>";
-  echo json_encode(['nam' => $nam, 'des' => $des, 'prc' => $prc, 'udt' => $udt]);
+  $udt =
+    "<button class='w3-btn w3-theme w3-right' onclick='updateBook({$id})'>Update</button>";
+  echo json_encode(['nam' => $nam, 'des' => $des, 'prc' => $prc,
+                    'udt' => $udt]);
   exit();
 }
 
@@ -113,7 +117,8 @@ function updateBook() {
   $nam = $arr[1];
   $des = $arr[2];
   $prc = $arr[3];
-  $query = "UPDATE book SET name = ?, description = ?, price = ? WHERE `__pk_id` = ?";
+  $query =
+    "UPDATE book SET name = ?, description = ?, price = ? WHERE `__pk_id` = ?";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("sssi", $nam, $des, $prc, $id);
   $stmt->execute();
@@ -132,7 +137,8 @@ function readStock() {
   $stmt->store_result();
   $stmt->bind_result($stk);
   $stmt->fetch();
-  $udt = "<button class='w3-btn w3-theme w3-right' onclick='updateStock({$id})'>Increment</button>";
+  $udt =
+    "<button class='w3-btn w3-theme w3-right' onclick='updateStock({$id})'>Increment</button>";
   echo json_encode(['stk' => $stk, 'udt' => $udt]);
   exit();
 }
@@ -162,7 +168,8 @@ function readPrograms() {
   <tbody>
 HTML;
 
-  $query = "SELECT name, description, 'enrolled' AS enrolled FROM program ORDER BY `__pk_id` ASC";
+  $query =
+    "SELECT name, description, 'enrolled' AS enrolled FROM program ORDER BY `__pk_id` ASC";
   $result = $mysqli->query($query);
   if ($result->num_rows > 0)
     while ($row = $result->fetch_assoc()) {

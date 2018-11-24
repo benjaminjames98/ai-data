@@ -68,7 +68,8 @@ if (isset($username, $email, $p)) {
   $password = password_hash($password, PASSWORD_BCRYPT);
 
   // Insert the new user into the database
-  if ($insert_stmt = $mysqli->prepare("INSERT INTO login_user (username, email, password) VALUES (?, ?, ?)")) {
+  if ($insert_stmt =
+    $mysqli->prepare("INSERT INTO login_user (username, email, password) VALUES (?, ?, ?)")) {
     $insert_stmt->bind_param('sss', $username, $email, $password);
     // Execute the prepared query.
     if (!$insert_stmt->execute()) {

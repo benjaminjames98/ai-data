@@ -29,14 +29,17 @@ function readDB() {
 
   function readChurches() {
     global $db;
-    $query = "SELECT `__pk_id`, name, denomination, region, visibility, note  FROM church";
+    $query =
+      "SELECT `__pk_id`, name, denomination, region, visibility, note  FROM church";
     if (!$stmt = $db->prepare($query)) throwError("read_church");
     $stmt->execute();
     $stmt->bind_result($cid, $nam, $den, $reg, $vis, $not);
     $churches = [];
     while ($stmt->fetch())
-      $churches[] = ['id' => $cid, 'name' => $nam, 'denomination' => $den, 'region' => $reg,
-        'visibility' => $vis, 'note' => $not];
+      $churches[] =
+        ['id'         => $cid, 'name' => $nam, 'denomination' => $den,
+         'region'     => $reg,
+         'visibility' => $vis, 'note' => $not];
     $stmt->close();
 
     for ($i = 0; $i < count($churches); $i++) {
@@ -49,15 +52,17 @@ function readDB() {
 
   function readPeople() {
     global $db;
-    $query = "SELECT `__pk_id`, first_name, last_name, CONCAT(first_name, ' ', last_name), note"
+    $query =
+      "SELECT `__pk_id`, first_name, last_name, CONCAT(first_name, ' ', last_name), note"
       . " FROM person";
     if (!$stmt = $db->prepare($query)) throwError("read_people");
     $stmt->execute();
     $stmt->bind_result($pid, $fnm, $lnm, $nam, $not);
     $people = [];
     while ($stmt->fetch())
-      $people[] = ['id' => $pid, 'first_name' => $fnm, 'last_name' => $lnm, 'name' => $nam,
-        'note' => $not];
+      $people[] = ['id'   => $pid, 'first_name' => $fnm, 'last_name' => $lnm,
+                   'name' => $nam,
+                   'note' => $not];
     $stmt->close();
 
     for ($i = 0; $i < count($people); $i++) {
@@ -77,7 +82,8 @@ function createChurch() {
   if (!array_key_exists('data', $_REQUEST)) throwError('create_church 1');
   $data = json_decode($_REQUEST['data']);
 
-  $query = "INSERT INTO church (name, denomination, region, visibility) VALUES (?, ?, ?, ?)";
+  $query =
+    "INSERT INTO church (name, denomination, region, visibility) VALUES (?, ?, ?, ?)";
   if (!$stmt = $db->prepare($query)) throwError("create_church 2");
   $stmt->bind_param('ssss', $data->name, $data->denomination,
     $data->region, $data->visibility);
@@ -101,14 +107,17 @@ function readChurch() {
   if (!array_key_exists('id', $_REQUEST)) throwError('read_church 1');
   $id = $_REQUEST['id'];
 
-  $query = "SELECT `__pk_id`, name, denomination, region, visibility, note  FROM church WHERE `__pk_id` = ?";
+  $query =
+    "SELECT `__pk_id`, name, denomination, region, visibility, note  FROM church WHERE `__pk_id` = ?";
   if (!$stmt = $db->prepare($query)) throwError("read_church");
   $stmt->bind_param('s', $id);
   $stmt->execute();
   $stmt->bind_result($cid, $nam, $den, $reg, $vis, $not);
   $stmt->fetch();
-  $church = ['id' => $cid, 'name' => $nam, 'denomination' => $den, 'region' => $reg,
-    'visibility' => $vis, 'note' => $not];
+  $church =
+    ['id'         => $cid, 'name' => $nam, 'denomination' => $den,
+     'region'     => $reg,
+     'visibility' => $vis, 'note' => $not];
   $stmt->close();
 
   $church['contacts'] = readContacts('church', $cid);
@@ -122,7 +131,8 @@ function updateChurch() {
   if (!array_key_exists('data', $_REQUEST)) throwError('update_church 1');
   $ch = json_decode($_REQUEST['data']);
 
-  $query = "UPDATE church SET name=?, denomination=?, region=?, visibility=?, note=? WHERE `__pk_id`=?";
+  $query =
+    "UPDATE church SET name=?, denomination=?, region=?, visibility=?, note=? WHERE `__pk_id`=?";
   if (!$stmt = $db->prepare($query)) throwError("update_church 2");
   $stmt->bind_param('ssssss', $ch->name, $ch->denomination, $ch->region,
     $ch->visibility, $ch->note, $ch->id);
@@ -161,7 +171,8 @@ function updatePerson() {
   if (!array_key_exists('data', $_REQUEST)) throwError('update_person 1');
   $ch = json_decode($_REQUEST['data']);
 
-  $query = "UPDATE person SET first_name=?, last_name=?, note=? WHERE `__pk_id`=?";
+  $query =
+    "UPDATE person SET first_name=?, last_name=?, note=? WHERE `__pk_id`=?";
   if (!$stmt = $db->prepare($query)) throwError("update_person 2");
   $stmt->bind_param('ssss', $ch->first_name, $ch->last_name, $ch->note,
     $ch->id);
@@ -177,15 +188,17 @@ function readPerson() {
   if (!array_key_exists('id', $_REQUEST)) throwError('read_person 1');
   $id = $_REQUEST['id'];
 
-  $query = "SELECT first_name, last_name, CONCAT(first_name, ' ', last_name), note"
+  $query =
+    "SELECT first_name, last_name, CONCAT(first_name, ' ', last_name), note"
     . " FROM person where __pk_id=?";
   if (!$stmt = $db->prepare($query)) throwError("read_people");
   $stmt->bind_param('s', $id);
   $stmt->execute();
   $stmt->bind_result($fnm, $lnm, $nam, $not);
   $stmt->fetch();
-  $person = ['id' => $id, 'first_name' => $fnm, 'last_name' => $lnm, 'name' => $nam,
-    'note' => $not];
+  $person =
+    ['id'   => $id, 'first_name' => $fnm, 'last_name' => $lnm, 'name' => $nam,
+     'note' => $not];
   $stmt->close();
 
   $person['contacts'] = readContacts('person', $id);
@@ -273,7 +286,8 @@ function createRole() {
   if (!array_key_exists('data', $_REQUEST)) throwError('create_role 1');
   $data = json_decode($_REQUEST['data']);
 
-  $query = "INSERT INTO role (`_fk_person`, `_fk_church`, type) VALUES (?, ?, ?)";
+  $query =
+    "INSERT INTO role (`_fk_person`, `_fk_church`, type) VALUES (?, ?, ?)";
   if (!$stmt = $db->prepare($query)) throwError("create_role 2");
   $stmt->bind_param('sss', $data->person_id, $data->church_id, $data->type);
   $stmt->execute();
@@ -334,8 +348,9 @@ MYSQL;
   $arr = [];
   while ($stmt->fetch()) {
     if ($type === 'add')
-      $arr[] = ['type' => $type, 'id' => $contactId, 'contact' => $contact, 'ln1' => $ln1,
-        'ln2' => $ln2, 'sub' => $sub, 'stt' => $stt, 'pcd' => $pcd];
+      $arr[] = ['type' => $type, 'id' => $contactId, 'contact' => $contact,
+                'ln1'  => $ln1,
+                'ln2'  => $ln2, 'sub' => $sub, 'stt' => $stt, 'pcd' => $pcd];
     else
       $arr[] = ['type' => $type, 'id' => $contactId, 'contact' => $contact];
   }
@@ -346,7 +361,8 @@ MYSQL;
 function readRoles($type, $id) {
   global $db;
   if ($type === 'church')
-    $query = "SELECT r.type, r.__pk_id, p.__pk_id, CONCAT(p.first_name, ' ', p.last_name)"
+    $query =
+      "SELECT r.type, r.__pk_id, p.__pk_id, CONCAT(p.first_name, ' ', p.last_name)"
       . " FROM person p, role r WHERE p.`__pk_id` = r.`_fk_person` AND r.`_fk_church` = $id";
   else
     $query = "SELECT r.type, r.__pk_id, c.__pk_id, c.name"
@@ -357,7 +373,8 @@ function readRoles($type, $id) {
   $stmt->bind_result($role, $rid, $iid, $name);
   $arr = [];
   while ($stmt->fetch())
-    $arr[] = ['role' => $role, 'role_id' => $rid, 'id' => $iid, 'name' => $name];
+    $arr[] =
+      ['role' => $role, 'role_id' => $rid, 'id' => $iid, 'name' => $name];
   $stmt->close();
   return $arr;
 }

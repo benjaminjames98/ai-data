@@ -16,35 +16,35 @@ if ($mysqli == -1) throwError();
 $q = null;
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
   $q = $_POST['q'];
-else if ($_SERVER['REQUEST_METHOD'] == 'GET')
+elseif ($_SERVER['REQUEST_METHOD'] == 'GET')
   $q = $_GET['q'];
 else throwError('Request Method');
 
 /*---- $q ----*/
 
 if ($q == 'pw_check') pwCheck();
-else if ($q == 'read_students') readStudents();
-else if ($q == 'create_student') createStudent();
-else if ($q == 'update_student_info') updateStudentInfo();
-else if ($q == 'update_student_payee') updateStudentPayee();
-else if ($q == 'read_student') readStudent();
-else if ($q == 'read_cohorts') readCohorts();
-else if ($q == 'create_cohort') createCohort();
-else if ($q == 'update_cohort_info') updateCohortInfo();
-else if ($q == 'update_cohort_note') updateCohortNote();
-else if ($q == 'read_cohort') readCohort();
-else if ($q == 'read_cohort_students') readCohortStudents();
-else if ($q == 'create_cohort_student') createCohortStudent();
-else if ($q == 'delete_cohort_student') deleteCohortStudent();
+elseif ($q == 'read_students') readStudents();
+elseif ($q == 'create_student') createStudent();
+elseif ($q == 'update_student_info') updateStudentInfo();
+elseif ($q == 'update_student_payee') updateStudentPayee();
+elseif ($q == 'read_student') readStudent();
+elseif ($q == 'read_cohorts') readCohorts();
+elseif ($q == 'create_cohort') createCohort();
+elseif ($q == 'update_cohort_info') updateCohortInfo();
+elseif ($q == 'update_cohort_note') updateCohortNote();
+elseif ($q == 'read_cohort') readCohort();
+elseif ($q == 'read_cohort_students') readCohortStudents();
+elseif ($q == 'create_cohort_student') createCohortStudent();
+elseif ($q == 'delete_cohort_student') deleteCohortStudent();
 // Contacts
-else if ($q == 'read_contacts') readContacts();
-else if ($q == 'create_contact') createContact();
-else if ($q == 'read_contact') readContact();
-else if ($q == 'update_contact') updateContact();
-else if ($q == 'delete_contact') deleteContact();
+elseif ($q == 'read_contacts') readContacts();
+elseif ($q == 'create_contact') createContact();
+elseif ($q == 'read_contact') readContact();
+elseif ($q == 'update_contact') updateContact();
+elseif ($q == 'delete_contact') deleteContact();
 // Misc
-else if ($q == 'read_payees') readPayees();
-else if ($q == 'cohort_prep') cohortPrep();
+elseif ($q == 'read_payees') readPayees();
+elseif ($q == 'cohort_prep') cohortPrep();
 else throwError('End Script');
 
 
@@ -101,7 +101,8 @@ function readStudent() {
   global $mysqli;
   $arr = explode('||', $_GET['arr']);
   $id = $arr[0];
-  $query = "SELECT `__pk_id`, `_fk_payee`, name, notes FROM student WHERE __pk_id = ?";
+  $query =
+    "SELECT `__pk_id`, `_fk_payee`, name, notes FROM student WHERE __pk_id = ?";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $id);
   $stmt->execute();
@@ -127,8 +128,10 @@ HTML;
   $add_crt = <<<HTML
 <button class='w3-btn w3-theme w3-right' onclick="createContact({$id}, 'add');">Create</button>
 HTML;
-  echo json_encode(['id' => $id, 'pid' => $pid, 'nam' => $nam, 'not' => $not, 'sav' => $sav, 'chg' => $chg,
-    'ref' => $ref, 'eml_crt' => $eml_crt, 'phn_crt' => $phn_crt, 'add_crt' => $add_crt]);
+  echo json_encode(['id'      => $id, 'pid' => $pid, 'nam' => $nam,
+                    'not'     => $not, 'sav' => $sav, 'chg' => $chg,
+                    'ref'     => $ref, 'eml_crt' => $eml_crt,
+                    'phn_crt' => $phn_crt, 'add_crt' => $add_crt]);
   exit();
 }
 
@@ -200,9 +203,11 @@ function createCohort() {
   $cbk = $arr[4];
   $nbk = $arr[5];
   $pgm = $arr[6];
-  $query = "INSERT INTO cohort (name, `_fk_leader`, unlisted_members, active, `_fk_current_book`, `_fk_next_book`, `_fk_program`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+  $query =
+    "INSERT INTO cohort (name, `_fk_leader`, unlisted_members, active, `_fk_current_book`, `_fk_next_book`, `_fk_program`) VALUES (?, ?, ?, ?, ?, ?, ?)";
   $stmt = $mysqli->prepare($query);
-  $stmt->bind_param("siiiiii", $nam, $ldr, $umb, intval($atv == 'true'), $cbk, $nbk, $pgm);
+  $stmt->bind_param("siiiiii", $nam, $ldr, $umb, intval($atv == 'true'), $cbk,
+    $nbk, $pgm);
   $stmt->execute();
   if ($stmt->affected_rows === 0) throwError("create_cohort");
   $id = $mysqli->insert_id;
@@ -227,7 +232,8 @@ SET name = ?, `_fk_leader` = ?, unlisted_members = ?, active = ?, `_fk_current_b
 WHERE `__pk_id` = ?;
 MYSQL;
   $stmt = $mysqli->prepare($query);
-  $stmt->bind_param("siiiiiii", $nam, $ldr, $umb, intval($atv == 'true'), $cbk, $nbk, $pgm, $id);
+  $stmt->bind_param("siiiiiii", $nam, $ldr, $umb, intval($atv == 'true'), $cbk,
+    $nbk, $pgm, $id);
   $stmt->execute();
   if ($stmt->affected_rows === 0) throwError("update_cohort_info");
   $id = $mysqli->insert_id;
@@ -289,8 +295,10 @@ HTML;
 HTML;
 
 
-  echo json_encode(['id' => $id, 'nam' => $nam, 'not' => $not, 'umb' => $umb, 'atv' => $atv, 'ldr' => $ldr, 'cbk' => $cbk,
-    'nbk' => $nbk, 'pgm' => $pgm, 'ref' => $ref, 'sav' => $sav, 'chg' => $chg, 'sdt' => $sdt]);
+  echo json_encode(['id'  => $id, 'nam' => $nam, 'not' => $not, 'umb' => $umb,
+                    'atv' => $atv, 'ldr' => $ldr, 'cbk' => $cbk,
+                    'nbk' => $nbk, 'pgm' => $pgm, 'ref' => $ref, 'sav' => $sav,
+                    'chg' => $chg, 'sdt' => $sdt]);
   exit();
 }
 
@@ -431,21 +439,26 @@ function createContact() {
   $stmt = null;
   $msg = null;
   if ($type === 'eml') {
-    $query = "INSERT INTO email (`_fk_student`, email_address, type) VALUES (?, ?, 'student')";
+    $query =
+      "INSERT INTO email (`_fk_student`, email_address, type) VALUES (?, ?, 'student')";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("ss", $id = $arr[1], $eml = $arr[2]);
     $msg = 'Email created: ' . $eml;
-  } else if ($type === 'phn') {
-    $query = "INSERT INTO phone (`_fk_student`, phone_number, type) VALUES (?, ?, 'student')";
+  } elseif ($type === 'phn') {
+    $query =
+      "INSERT INTO phone (`_fk_student`, phone_number, type) VALUES (?, ?, 'student')";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("ss", $id = $arr[1], $phn = $arr[2]);
     $msg = 'Phone created: ' . $phn;
-  } else if ($type === 'add') {
-    $query = "INSERT INTO address (`_fk_student`, line_1, line_2, suburb, state, post_code, type) VALUES (?,?,?,?,?,?, 'student')";
+  } elseif ($type === 'add') {
+    $query =
+      "INSERT INTO address (`_fk_student`, line_1, line_2, suburb, state, post_code, type) VALUES (?,?,?,?,?,?, 'student')";
     $stmt = $mysqli->prepare($query);
-    $stmt->bind_param("ssssss", $id = $arr[1], $ln1 = $arr[2], $ln2 = $arr[3], $sub = $arr[4],
+    $stmt->bind_param("ssssss", $id = $arr[1], $ln1 = $arr[2], $ln2 = $arr[3],
+      $sub = $arr[4],
       $stt = $arr[5], $pcd = $arr[6]);
-    $msg = 'Address created: ' . $ln1 . ", " . $ln2 . ", " . $sub . ", " . $stt . ", " . $pcd;
+    $msg = 'Address created: ' . $ln1 . ", " . $ln2 . ", " . $sub . ", " . $stt
+      . ", " . $pcd;
   }
   $stmt->execute();
   if ($stmt->affected_rows === 0) throwError("create_contact");
@@ -459,9 +472,12 @@ function readContact() {
   $id = $arr[0];
   $type = $arr[1];
   $query = '';
-  if ($type === 'eml') $query = "SELECT email_address, '', '', '', '', `_fk_student` FROM email WHERE `__pk_id` = ?";
-  else if ($type === 'phn') $query = "SELECT phone_number, '', '', '', '', `_fk_student` FROM phone WHERE `__pk_id` = ?";
-  else if ($type === 'add') $query = "SELECT line_1, line_2, suburb, state, post_code, `_fk_student` FROM address WHERE `__pk_id` = ?";
+  if ($type === 'eml') $query =
+    "SELECT email_address, '', '', '', '', `_fk_student` FROM email WHERE `__pk_id` = ?";
+  elseif ($type === 'phn') $query =
+    "SELECT phone_number, '', '', '', '', `_fk_student` FROM phone WHERE `__pk_id` = ?";
+  elseif ($type === 'add') $query =
+    "SELECT line_1, line_2, suburb, state, post_code, `_fk_student` FROM address WHERE `__pk_id` = ?";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $id);
   $stmt->execute();
@@ -471,7 +487,8 @@ function readContact() {
   $udt = <<<HTML
 <button class='w3-btn w3-theme w3-right' onclick="updateContact({$pid},{$id},'{$type}');">Update</button>
 HTML;
-  echo json_encode(['v0' => $v0, 'v1' => $v1, 'v2' => $v2, 'v3' => $v3, 'v4' => $v4, 'udt' => $udt]);
+  echo json_encode(['v0' => $v0, 'v1' => $v1, 'v2' => $v2, 'v3' => $v3,
+                    'v4' => $v4, 'udt' => $udt]);
   exit();
 }
 
@@ -486,17 +503,19 @@ function updateContact() {
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("si", $eml = $arr[2], $cid = $arr[1]);
     $msg = 'Email updated: ' . $eml;
-  } else if ($type === 'phn') {
+  } elseif ($type === 'phn') {
     $query = "UPDATE phone SET phone_number = ? WHERE `__pk_id` = ?";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("si", $phn = $arr[2], $cid = $arr[1]);
     $msg = 'Phone updated: ' . $phn;
-  } else if ($type === 'add') {
-    $query = "UPDATE address SET line_1 = ?,line_2 = ?,suburb = ?,state = ?,post_code = ? WHERE `__pk_id` = ?  ";
+  } elseif ($type === 'add') {
+    $query =
+      "UPDATE address SET line_1 = ?,line_2 = ?,suburb = ?,state = ?,post_code = ? WHERE `__pk_id` = ?  ";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("sssssi", $ln1 = $arr[2], $ln2 = $arr[3], $sub = $arr[4],
       $stt = $arr[5], $pcd = $arr[6], $cid = $arr[1]);
-    $msg = 'Address updated: ' . $ln1 . ", " . $ln2 . ", " . $sub . ", " . $stt . ", " . $pcd;
+    $msg = 'Address updated: ' . $ln1 . ", " . $ln2 . ", " . $sub . ", " . $stt
+      . ", " . $pcd;
   }
   $stmt->execute();
   if ($stmt->affected_rows === 0) throwError("update_contact");
@@ -510,8 +529,8 @@ function deleteContact() {
   $type = $arr[0];
   $query = null;
   if ($type === 'eml') $query = "DELETE FROM email WHERE `__pk_id` = ?";
-  else if ($type === 'phn') $query = "DELETE FROM phone WHERE `__pk_id` = ?";
-  else if ($type === 'add') $query = "DELETE FROM address WHERE `__pk_id` = ?";
+  elseif ($type === 'phn') $query = "DELETE FROM phone WHERE `__pk_id` = ?";
+  elseif ($type === 'add') $query = "DELETE FROM address WHERE `__pk_id` = ?";
   if (!isset($query)) throwError("delete_contact_1");
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $id = $arr[1]);
