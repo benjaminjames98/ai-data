@@ -64,6 +64,7 @@ if (!permission_check($mysqli, $PAGE_TYPE)) {
     RouteListController('<?= htmlentities($_SESSION['username']) ?>',
       el('church_container'),
       el('fill_participating'), el('fil_route'));
+    
   };
 </script>
 
