@@ -1,5 +1,6 @@
 <?php
 include_once '../../../../includes/db_connect.php';
+include_once '../../../../includes/utils.php';
 
 function throwError($msg = '') {
   die(json_encode(["a" => "0", "msg" => "error in: " . $msg]));
@@ -11,19 +12,6 @@ $q = $data->q;
 if ($q == 'read_usernames') read_usernames();
 elseif ($q == 'read_permissions') read_permissions();
 elseif ($q == 'update_permissions') update_permissions();
-
-function read_usernames() {
-  global $mysqli;
-  $query = "SELECT username FROM login_user";
-  if (!$stmt = $mysqli->prepare($query)) throwError("read_roles");
-  $stmt->execute();
-  $stmt->bind_result($username);
-  $arr = [];
-  while ($stmt->fetch()) $arr[] = $username;
-  $stmt->close();
-
-  die(json_encode(["success" => true, "usernames" => $arr]));
-}
 
 function read_permissions() {
   global $mysqli, $data;

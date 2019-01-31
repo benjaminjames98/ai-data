@@ -20,6 +20,7 @@ const userFactory = function(uid_el, eml_el, pw_el, conf_el) {
   let eml = eml_el.value;
   let pw = pw_el.value;
   let conf = conf_el.value;
+
   let isValid = function() {
     let re1 = /^\w+$/;
     let re2 = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;

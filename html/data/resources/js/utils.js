@@ -32,3 +32,10 @@ function jsonPost(url, obj, fun) {
 }
 
 function el(a) { return document.getElementById(a); }
+
+function loadUsernames(url, select_el) {
+  jsonPost(url, {q: 'read_usernames'}, (obj) => {
+    let reducer = (acc, cur) => acc + `<option value="${cur}">${cur}</option>`;
+    select_el.innerHTML = obj.usernames.reduce(reducer, '');
+  });
+}

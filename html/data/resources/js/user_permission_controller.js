@@ -3,14 +3,7 @@ const UserPermissionController = function(select_el, container_el, button_el) {
     + 'resources/ajax_backend/user_permission_controller.php';
   let username = '';
 
-  function loadUsernames() {
-    jsonPost(_EDIT_PER_URL, {q: 'read_usernames'}, (obj) => {
-      let reducer = (acc, cur) => acc
-        + `<option value="${cur}">${cur}</option>`;
-      select_el.innerHTML = obj.usernames.reduce(reducer, '');
-      select_el.onchange();
-    });
-  }
+  loadUsernames(_EDIT_PER_URL, select_el);
 
   function loadPermissions(uid = '') {
     username = uid;
@@ -39,7 +32,5 @@ const UserPermissionController = function(select_el, container_el, button_el) {
         alert(obj.success ? 'success' : obj.msg);
       });
   };
-
-  loadUsernames();
 
 };
