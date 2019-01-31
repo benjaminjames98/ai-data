@@ -65,21 +65,10 @@ $PAGE_RECONCILER = isset($PAGE_RECONCILER) ? $PAGE_RECONCILER : '';
              class="w3-bar-item w3-button w3-padding">
               <i class="fas fa-church fa-fw"></i> Churches</a>
       <?php endif;
-      if ($per_education) : ?>
-          <a href="<?= $PAGE_RECONCILER ?>cohorts/education_frontend.php"
-             class="w3-bar-item w3-button w3-padding">
-              <i class="fas fa-graduation-cap fa-fw"></i> Cohorts</a>
-      <?php endif;
       if ($per_bread) : ?>
           <a href="<?= $PAGE_RECONCILER ?>bread/bread_churches_frontend.php"
              class="w3-bar-item w3-button w3-padding">
               <i class="fas fa-cookie-bite fa-fw"></i> Bread - Management</a>
-          <a href="<?= $PAGE_RECONCILER ?>bread/bread_status_all_frontend.php"
-             class="w3-bar-item w3-button w3-padding">
-              <i class="fas fa-cookie-bite fa-fw"></i> Bread - State</a>
-          <a href="<?= $PAGE_RECONCILER ?>bread/bread_status_frontend.php"
-             class="w3-bar-item w3-button w3-padding">
-              <i class="fas fa-cookie-bite fa-fw"></i> Bread - Regional</a>
       <?php endif; ?>
         <hr>
         <a href="<?= $PAGE_RECONCILER ?>resources/ajax_backend/login_logout.php"

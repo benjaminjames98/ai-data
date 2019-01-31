@@ -1,10 +1,8 @@
 <?php
-include_once(dirname(__FILE__) . '/../../includes/db_connect.php');
-include_once(dirname(__FILE__) . '/../../includes/login_functions.php');
+include_once '../../includes/db_connect.php';
+include_once '../../includes/login_functions.php';
 
 sec_session_start();
-
-$PAGE_RECONCILER = '';
 
 if (!login_check($mysqli)) {
   header('Location: index.php');
@@ -13,7 +11,7 @@ if (!login_check($mysqli)) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard</title>
+    <title>App Hub</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet"

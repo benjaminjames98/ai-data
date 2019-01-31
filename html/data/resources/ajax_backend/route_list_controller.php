@@ -17,7 +17,7 @@ function read_region() {
   // get region info
   $prep_stmt = <<<MYSQL
 SELECT r.`__pk_id`, r.name, r.code
-FROM region as r,
+FROM area as r,
      login_user as u
 WHERE r.`_fk_user_administrator` = u.`__pk_id`
   AND u.username = ?

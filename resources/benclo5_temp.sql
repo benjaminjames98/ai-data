@@ -476,7 +476,7 @@ CREATE TABLE `church` (
 -- Dumping data for table `church`
 --
 
-INSERT INTO `church` (`__pk_id`, `name`, `denomination`, `note`, `region`, `visibility`, `bread_fk_route`, `bread_participating`, `bread_time`, `bread_delivered`, `bread_note`, `bread_add_line_1`, `bread_add_line_2`, `bread_add_suburb`, `bread_add_state`, `bread_add_post_code`, `bread_gluten_free`, `bread_bun`, `bread_loaves`) VALUES
+INSERT INTO `church` (`__pk_id`, `name`, `denomination`, `note`, `_fk_region`, `visibility`, `bread_fk_route`, `bread_participating`, `bread_time`, `bread_delivered`, `bread_note`, `bread_add_line_1`, `bread_add_line_2`, `bread_add_suburb`, `bread_add_state`, `bread_add_post_code`, `bread_gluten_free`, `bread_bun`, `bread_loaves`) VALUES
 (2, 'name - 2', '7th Day Adventist', '', 'tas_e', 'public', 15, 'yes', '16:45:00', 1, '', '', 'line 2 - 2', 'Scottsdale', 'TAS', '7260', 0, 0, 0),
 (3, 'name - 3', 'Anglican', '', 'tas_nw', 'public', NULL, 'no', '00:00:00', 1, '', '', 'line 2 - 3', NULL, NULL, NULL, 0, 0, 0),
 (4, 'name - 4', 'ACC', '', 'tas_nw', 'public', NULL, 'no', '00:00:00', 1, '', '', 'line 2 - 4', NULL, NULL, NULL, 0, 0, 0),

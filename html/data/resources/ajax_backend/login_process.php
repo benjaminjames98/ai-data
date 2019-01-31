@@ -10,12 +10,12 @@ if (isset($_POST['email'], $_POST['p'])) {
 
   if (login($email, $password, $mysqli)) {
     // Login success
-    header('Location: ../../app_hub.php');
+    header('Location: ../../dashboard.php');
   } else {
     // Login failed
-    header('Location: ../../index.php?error=1');
+    header("Location: ../../index.php?error=1&email=${email}");
   }
 } else {
   // The correct POST variables were not sent to this page.
-  echo 'Invalid Request';
+  echo 'Something has gone terribly wrong...';
 }

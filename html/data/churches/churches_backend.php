@@ -30,7 +30,7 @@ function readDB() {
   function readChurches() {
     global $db;
     $query =
-      "SELECT `__pk_id`, name, denomination, region, visibility, note  FROM church";
+      "SELECT `__pk_id`, name, denomination, `_fk_area`, visibility, note  FROM church";
     if (!$stmt = $db->prepare($query)) throwError("read_church");
     $stmt->execute();
     $stmt->bind_result($cid, $nam, $den, $reg, $vis, $not);
@@ -83,7 +83,7 @@ function createChurch() {
   $data = json_decode($_REQUEST['data']);
 
   $query =
-    "INSERT INTO church (name, denomination, region, visibility) VALUES (?, ?, ?, ?)";
+    "INSERT INTO church (name, denomination, `_fk_area`, visibility) VALUES (?, ?, ?, ?)";
   if (!$stmt = $db->prepare($query)) throwError("create_church 2");
   $stmt->bind_param('ssss', $data->name, $data->denomination,
     $data->region, $data->visibility);
@@ -108,7 +108,7 @@ function readChurch() {
   $id = $_REQUEST['id'];
 
   $query =
-    "SELECT `__pk_id`, name, denomination, region, visibility, note  FROM church WHERE `__pk_id` = ?";
+    "SELECT `__pk_id`, name, denomination, `_fk_area`, visibility, note  FROM church WHERE `__pk_id` = ?";
   if (!$stmt = $db->prepare($query)) throwError("read_church");
   $stmt->bind_param('s', $id);
   $stmt->execute();
@@ -132,7 +132,7 @@ function updateChurch() {
   $ch = json_decode($_REQUEST['data']);
 
   $query =
-    "UPDATE church SET name=?, denomination=?, region=?, visibility=?, note=? WHERE `__pk_id`=?";
+    "UPDATE church SET name=?, denomination=?, `_fk_area`=?, visibility=?, note=? WHERE `__pk_id`=?";
   if (!$stmt = $db->prepare($query)) throwError("update_church 2");
   $stmt->bind_param('ssssss', $ch->name, $ch->denomination, $ch->region,
     $ch->visibility, $ch->note, $ch->id);

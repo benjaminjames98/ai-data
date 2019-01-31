@@ -23,7 +23,7 @@ if (!permission_check($mysqli, $PAGE_TYPE)) {
           href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="resources/styles/main.css">
     <link rel="stylesheet" href="resources/styles/w3.css">
-    <script type="text/JavaScript" src="resources/js/sha512.js"></script>
+    <script type="text/JavaScript" src="resources/js/login_sha512.js"></script>
     <script type="text/JavaScript" src="resources/js/utils.js"></script>
     <script type="text/JavaScript"
             src="resources/js/create_new_user.js"></script>
