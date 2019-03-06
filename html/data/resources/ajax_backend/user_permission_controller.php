@@ -20,21 +20,19 @@ function read_permissions() {
   $username = filter_var($username, FILTER_SANITIZE_STRING);
 
   $prep_stmt =
-    "SELECT per_users, per_education, per_bread, per_churches FROM login_user WHERE username = ?";
+    "SELECT per_users, per_churches FROM login_user WHERE username = ?";
   $stmt = $mysqli->prepare($prep_stmt);
   if (!$stmt) throwError('Database error at ' . __LINE__);
 
 
   $stmt->bind_param('s', $username);
   $stmt->execute();
-  $stmt->bind_result($usr, $edu, $brd, $chc);
+  $stmt->bind_result($usr, $chc);
   $stmt->fetch();
-  $perms = ['per_users'    => boolval($usr), 'per_education' => boolval($edu),
-            'per_bread'    => boolval($brd),
-            'per_churches' => boolval($chc)];
+  $perms = ['per_users' => boolval($usr), 'per_churches' => boolval($chc)];
 
-  die(json_encode(["success"     => true, "username" => $username,
-                   'permissions' => $perms]));
+  die(json_encode(["success" => true, "username" => $username,
+    'permissions' => $perms]));
 }
 
 function update_permissions() {
@@ -45,9 +43,8 @@ function update_permissions() {
   if (!isset($username, $perms)) throwError('please supply all inputs');
   $username = filter_var($username, FILTER_SANITIZE_STRING);
   $perms = array_filter($perms, function ($v, $k) {
-    $permission_types =
-      ['per_users', 'per_churches', 'per_education', 'per_bread'];
-    return in_array($k, $permission_types) || is_bool($v);
+    $permission_types = ['per_users', 'per_churches'];
+    return in_array($k, $permission_types) && is_bool($v);
   }, ARRAY_FILTER_USE_BOTH);
 
   foreach ($perms as $k => $v) {
@@ -55,7 +52,8 @@ function update_permissions() {
     $stmt = $mysqli->prepare($prep_stmt);
     if (!$stmt) throwError('Database error at ' . __LINE__ . ': '
       . $mysqli->error);
-    $stmt->bind_param('ss', $v, $username);
+    $val = ($v == true) ? '1' : '0';
+    $stmt->bind_param('ss', $val, $username);
     $stmt->execute();
     $stmt->close();
   }

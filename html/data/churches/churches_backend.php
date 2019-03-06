@@ -1,5 +1,5 @@
 <?php
-include_once "../../../../includes/db_connect.php";
+include_once "../../../includes/db_connect.php";
 
 function throwError($msg = '') {
   die(json_encode(["a" => "0", "msg" => "error in: " . $msg]));
@@ -33,13 +33,13 @@ function readDB() {
       "SELECT `__pk_id`, name, denomination, `_fk_area`, visibility, note  FROM church";
     if (!$stmt = $db->prepare($query)) throwError("read_church");
     $stmt->execute();
+    $cid = $nam = $den = $reg = $vis = $not = null;
     $stmt->bind_result($cid, $nam, $den, $reg, $vis, $not);
     $churches = [];
     while ($stmt->fetch())
       $churches[] =
-        ['id'         => $cid, 'name' => $nam, 'denomination' => $den,
-         'region'     => $reg,
-         'visibility' => $vis, 'note' => $not];
+        ['id' => $cid, 'name' => $nam, 'denomination' => $den,
+          'region' => $reg, 'visibility' => $vis, 'note' => $not];
     $stmt->close();
 
     for ($i = 0; $i < count($churches); $i++) {
@@ -57,12 +57,12 @@ function readDB() {
       . " FROM person";
     if (!$stmt = $db->prepare($query)) throwError("read_people");
     $stmt->execute();
+    $pid = $fnm = $lnm = $nam = $not = null;
     $stmt->bind_result($pid, $fnm, $lnm, $nam, $not);
     $people = [];
     while ($stmt->fetch())
-      $people[] = ['id'   => $pid, 'first_name' => $fnm, 'last_name' => $lnm,
-                   'name' => $nam,
-                   'note' => $not];
+      $people[] = ['id' => $pid, 'first_name' => $fnm, 'last_name' => $lnm,
+        'name' => $nam, 'note' => $not];
     $stmt->close();
 
     for ($i = 0; $i < count($people); $i++) {
@@ -96,6 +96,7 @@ function createChurch() {
   $query = "SELECT LAST_INSERT_ID()";
   if (!$stmt = $db->prepare($query)) throwError("create_church 3");
   $stmt->execute();
+  $church_id = null;
   $stmt->bind_result($church_id);
   $stmt->fetch();
 
@@ -112,12 +113,12 @@ function readChurch() {
   if (!$stmt = $db->prepare($query)) throwError("read_church");
   $stmt->bind_param('s', $id);
   $stmt->execute();
+  $cid = $nam = $den = $reg = $vis = $not = null;
   $stmt->bind_result($cid, $nam, $den, $reg, $vis, $not);
   $stmt->fetch();
   $church =
-    ['id'         => $cid, 'name' => $nam, 'denomination' => $den,
-     'region'     => $reg,
-     'visibility' => $vis, 'note' => $not];
+    ['id' => $cid, 'name' => $nam, 'denomination' => $den,
+      'region' => $reg, 'visibility' => $vis, 'note' => $not];
   $stmt->close();
 
   $church['contacts'] = readContacts('church', $cid);
@@ -160,6 +161,7 @@ function createPerson() {
   $query = "SELECT LAST_INSERT_ID()";
   if (!$stmt = $db->prepare($query)) throwError("create_person 3");
   $stmt->execute();
+  $person_id = null;
   $stmt->bind_result($person_id);
   $stmt->fetch();
 
@@ -194,11 +196,12 @@ function readPerson() {
   if (!$stmt = $db->prepare($query)) throwError("read_people");
   $stmt->bind_param('s', $id);
   $stmt->execute();
+  $fnm = $lnm = $nam = $not = null;
   $stmt->bind_result($fnm, $lnm, $nam, $not);
   $stmt->fetch();
   $person =
-    ['id'   => $id, 'first_name' => $fnm, 'last_name' => $lnm, 'name' => $nam,
-     'note' => $not];
+    ['id' => $id, 'first_name' => $fnm, 'last_name' => $lnm, 'name' => $nam,
+      'note' => $not];
   $stmt->close();
 
   $person['contacts'] = readContacts('person', $id);
@@ -344,13 +347,14 @@ line_1, line_2, suburb, state, post_code
 MYSQL;
   if (!$stmt = $db->prepare($query)) throwError("read_contacts: $type, $id");
   $stmt->execute();
+  $contactId = $contact = $ln1 = $ln2 = $sub = $stt = $pcd = null;
   $stmt->bind_result($type, $contactId, $contact, $ln1, $ln2, $sub, $stt, $pcd);
   $arr = [];
   while ($stmt->fetch()) {
     if ($type === 'add')
       $arr[] = ['type' => $type, 'id' => $contactId, 'contact' => $contact,
-                'ln1'  => $ln1,
-                'ln2'  => $ln2, 'sub' => $sub, 'stt' => $stt, 'pcd' => $pcd];
+        'ln1' => $ln1, 'ln2' => $ln2, 'sub' => $sub, 'stt' => $stt,
+        'pcd' => $pcd];
     else
       $arr[] = ['type' => $type, 'id' => $contactId, 'contact' => $contact];
   }
@@ -370,6 +374,7 @@ function readRoles($type, $id) {
 
   if (!$stmt = $db->prepare($query)) throwError("read_roles");
   $stmt->execute();
+  $role = $rid = $iid = $name = null;
   $stmt->bind_result($role, $rid, $iid, $name);
   $arr = [];
   while ($stmt->fetch())

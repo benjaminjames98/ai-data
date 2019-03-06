@@ -164,7 +164,7 @@ function login_check(mysqli $mysqli) {
 function permission_check(mysqli $mysqli, $permission) {
   if (!login_check($mysqli)) return false;
   if (!in_array($permission,
-    ['per_users', 'per_churches', 'per_bread', 'per_education'])) return false;
+    ['per_users', 'per_churches'])) return false;
 
   //login_check ensures that $_SESSION['username'] is set
   $username = $_SESSION['username'];

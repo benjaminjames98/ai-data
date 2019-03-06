@@ -10,9 +10,9 @@ $data = json_decode($_REQUEST['user']);
 $q = $data->q;
 
 if ($q == 'read_usernames') read_usernames();
-elseif ($q == 'change_password') update_permissions();
+elseif ($q == 'change_password') change_password();
 
-function update_permissions() {
+function change_password() {
   global $mysqli, $data;
   $usr = $data->usr;
   $pwd = $data->pwd;

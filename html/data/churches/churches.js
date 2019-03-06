@@ -86,7 +86,7 @@ class View {
       $.each(arr.sort(), function(i, val) {
         let cbx = $('<input type=\'checkbox\' checked>').attr({'value': val});
         let lbl = $('<label class=\'w3-animate-left\'>').append(cbx).append(
-          (val.trim() === '') ? ' -' : ' ' + val).append('<br>');
+          ($.trim(val) === '') ? ' -' : ' ' + val).append('<br>');
         setCheckboxListener(lbl, attr, val, cp);
         div.append(lbl);
       });
@@ -860,9 +860,12 @@ function createVisibilitySelector(id = 'mdl_ipt_1', val = 'private') {
   return $('<label class=\'w3-bar-item\'>').html('Visibility:').append(select);
 }
 
-function createRegionSelector(id = 'mdl_ipt_1', val = 'none') {
-  let select = $('<select>').attr({'id': id, 'name': id, 'class': 'w3-input'}).
-    append($(`<option value='none'>None</option>`)).append(
+// fix this one here
+// regions should dynamically appear
+// probably should use the model at some point...
+function createRegionSelector(id = 'mdl_ipt_1', val = '0') {
+  let select = $('<select>').attr({'id': 0, 'name': 'tas', 'class': 'w3-input'}).
+    append($(`<option value='0'>None</option>`)).append(
       $(`<option value='tas_nw'>TAS North West</option>`)).append(
       $(`<option value='tas_e'>TAS Eastern</option>`)).append(
       $(`<option value='tas_s'>TAS Southern</option>`));
