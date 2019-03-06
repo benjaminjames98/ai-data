@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.25, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: cnetdata
 -- ------------------------------------------------------
--- Server version	5.7.24-0ubuntu0.18.04.1
+-- Server version	5.7.25-0ubuntu0.18.04.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -59,7 +59,6 @@ DROP TABLE IF EXISTS `area`;
 CREATE TABLE `area` (
   `__pk_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
-  `_fk_user_administrator` int(11) DEFAULT NULL,
   `town` varchar(32) DEFAULT NULL,
   `sqr_km` double DEFAULT NULL,
   `population` int(11) DEFAULT NULL,
@@ -77,8 +76,31 @@ CREATE TABLE `area` (
 
 LOCK TABLES `area` WRITE;
 /*!40000 ALTER TABLE `area` DISABLE KEYS */;
-INSERT INTO `area` VALUES (0,'Tasmania',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(84,'Sorell',NULL,'Sorell',583.7,14414,'Rural',147.5785,-42.7793),(82,'Meander Valley',NULL,'Westbury',3330.3,19282,'Rural',146.8418,-41.5384),(83,'Northern Midlands',NULL,'Longford',5136.5,12822,'Rural',147.1218,-41.5958),(80,'Latrobe',NULL,'Latrobe',550,10699,'Rural',146.4059,-41.2443),(81,'Launceston',NULL,'Launceston',1413.6,65274,'Urban',147.1441,-41.4332),(79,'Kingborough',NULL,'Kingston',720.1,35853,'Urban',147.3083,-42.9769),(77,'Kentish',NULL,'Sheffield',1156,6128,'Rural',146.3326,-41.3861),(78,'King Island',NULL,'Currie',1095.8,1585,'Rural',143.8506,-39.9311),(75,'Hobart',NULL,'Hobart',77.9,50439,'Urban',147.3272,-42.8821),(76,'Huon Valley',NULL,'Huonville',5507.4,16199,'Rural',147.058,-43.0295),(61,'Break Oday',NULL,'St Helens',3525.8,6104,'Rural',148.2333,-41.3167),(62,'Brighton',NULL,'Brighton',171.3,16512,'Urban',147.25,-42.7),(63,'Burnie',NULL,'Burnie',611,18895,'Urban',145.9052,-41.0529),(64,'Central Coast',NULL,'Ulverstone',933.1,21362,'Urban',146.1872,-41.1703),(65,'Central Highlands',NULL,'Hamilton',7982.4,2141,'Rural',146.834,-42.556),(66,'Circular Head',NULL,'Smithton',4897.7,7926,'Rural',145.1206,-40.8578),(67,'Clarence',NULL,'Rosny Park',378,54819,'Urban',147.3692,-42.8664),(68,'Derwent Valley',NULL,'New Norfolk',4108.1,10021,'Rural',147.0594,-42.7828),(69,'Devonport',NULL,'Devonport',111.3,24696,'Urban',146.3452,-41.1771),(70,'Dorset',NULL,'Scottsdale',3227.6,6617,'Rural',147.5167,-41.1667),(71,'Flinders',NULL,'Whitemark',1996.6,906,'Rural',148.0179,-40.0913),(72,'George Town',NULL,'George Town',653.4,6764,'Rural',146.8271,-41.1063),(73,'Glamorgan-Spring Bay',NULL,'Triabunna',2591.4,4400,'Rural',147.9201,-42.5102),(74,'Glenorchy',NULL,'Glenorchy',121.1,46253,'Urban',147.2758,-42.8331),(85,'Southern Midlands',NULL,'Oatlands',2615.4,6043,'Rural',147.3706,-42.3),(86,'Tasman',NULL,'Nubeena',660.5,2372,'Rural',147.75,-43.1),(87,'Waratah-Wynyard',NULL,'Wynyard',3531,13578,'Rural',145.7167,-41),(88,'West Coast',NULL,'Zeehan',9589.8,4149,'Rural',145.338,-41.8875),(89,'West Tamar',NULL,'Beaconsfield',691.1,23718,'Urban',146.8236,-41.1934);
+INSERT INTO `area` VALUES (0,'Tasmania',NULL,NULL,NULL,NULL,NULL,NULL),(84,'Sorell','Sorell',583.7,14414,'Rural',147.5785,-42.7793),(82,'Meander Valley','Westbury',3330.3,19282,'Rural',146.8418,-41.5384),(83,'Northern Midlands','Longford',5136.5,12822,'Rural',147.1218,-41.5958),(80,'Latrobe','Latrobe',550,10699,'Rural',146.4059,-41.2443),(81,'Launceston','Launceston',1413.6,65274,'Urban',147.1441,-41.4332),(79,'Kingborough','Kingston',720.1,35853,'Urban',147.3083,-42.9769),(77,'Kentish','Sheffield',1156,6128,'Rural',146.3326,-41.3861),(78,'King Island','Currie',1095.8,1585,'Rural',143.8506,-39.9311),(75,'Hobart','Hobart',77.9,50439,'Urban',147.3272,-42.8821),(76,'Huon Valley','Huonville',5507.4,16199,'Rural',147.058,-43.0295),(61,'Break Oday','St Helens',3525.8,6104,'Rural',148.2333,-41.3167),(62,'Brighton','Brighton',171.3,16512,'Urban',147.25,-42.7),(63,'Burnie','Burnie',611,18895,'Urban',145.9052,-41.0529),(64,'Central Coast','Ulverstone',933.1,21362,'Urban',146.1872,-41.1703),(65,'Central Highlands','Hamilton',7982.4,2141,'Rural',146.834,-42.556),(66,'Circular Head','Smithton',4897.7,7926,'Rural',145.1206,-40.8578),(67,'Clarence','Rosny Park',378,54819,'Urban',147.3692,-42.8664),(68,'Derwent Valley','New Norfolk',4108.1,10021,'Rural',147.0594,-42.7828),(69,'Devonport','Devonport',111.3,24696,'Urban',146.3452,-41.1771),(70,'Dorset','Scottsdale',3227.6,6617,'Rural',147.5167,-41.1667),(71,'Flinders','Whitemark',1996.6,906,'Rural',148.0179,-40.0913),(72,'George Town','George Town',653.4,6764,'Rural',146.8271,-41.1063),(73,'Glamorgan-Spring Bay','Triabunna',2591.4,4400,'Rural',147.9201,-42.5102),(74,'Glenorchy','Glenorchy',121.1,46253,'Urban',147.2758,-42.8331),(85,'Southern Midlands','Oatlands',2615.4,6043,'Rural',147.3706,-42.3),(86,'Tasman','Nubeena',660.5,2372,'Rural',147.75,-43.1),(87,'Waratah-Wynyard','Wynyard',3531,13578,'Rural',145.7167,-41),(88,'West Coast','Zeehan',9589.8,4149,'Rural',145.338,-41.8875),(89,'West Tamar','Beaconsfield',691.1,23718,'Urban',146.8236,-41.1934);
 /*!40000 ALTER TABLE `area` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `area_administrator`
+--
+
+DROP TABLE IF EXISTS `area_administrator`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `area_administrator` (
+  `_fk_area` int(11) NOT NULL,
+  `_fk_user` int(11) NOT NULL,
+  PRIMARY KEY (`_fk_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `area_administrator`
+--
+
+LOCK TABLES `area_administrator` WRITE;
+/*!40000 ALTER TABLE `area_administrator` DISABLE KEYS */;
+/*!40000 ALTER TABLE `area_administrator` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -159,7 +181,7 @@ CREATE TABLE `login_attempts` (
 
 LOCK TABLES `login_attempts` WRITE;
 /*!40000 ALTER TABLE `login_attempts` DISABLE KEYS */;
-INSERT INTO `login_attempts` VALUES (1,'1537703515'),(1,'1537703841'),(1,'1537704085'),(1,'1537747474'),(6,'1537878944'),(13,'1538102856'),(10,'1538354128'),(10,'1542600605'),(10,'1542604195'),(10,'1548912449'),(1,'1548913639'),(12,'1548913724'),(10,'1548939296'),(1,'1551873604');
+INSERT INTO `login_attempts` VALUES (1,'1537703515'),(1,'1537703841'),(1,'1537704085'),(1,'1537747474'),(6,'1537878944'),(13,'1538102856'),(10,'1538354128'),(10,'1542600605'),(10,'1542604195'),(10,'1548912449'),(1,'1548913639'),(12,'1548913724'),(10,'1548939296'),(1,'1551873604'),(2,'1551877060');
 /*!40000 ALTER TABLE `login_attempts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,7 +209,7 @@ CREATE TABLE `login_user` (
 
 LOCK TABLES `login_user` WRITE;
 /*!40000 ALTER TABLE `login_user` DISABLE KEYS */;
-INSERT INTO `login_user` VALUES (1,'test_user','test@example.com','$2y$10$tEYeqg91xtIXQoB28qA6rODrLRDinC9hEbH/OI8TE4ihPTKmcMtWC',1,0),(2,'Ben','ben@ai.org.au','$2y$10$p5MgzSC2HsIf/VNhlUYnQenU6TdN8OZcsPcfn14Pznlj8PIsPBCLS',0,0),(3,'username','user@ecample.com','$2y$10$6LuosqVB1q5oljg53uR1refcK4kFUy7iP8WmoJGY5f/brNb.N0Y5q',0,0),(4,'test1','test@exampl1.com','$2y$10$C3gzZeCayvlhAgbR59q3ceZZG7qovYc.JMTWzYHskceK0w3fDIaki',0,0),(5,'bob','bob@bob.com','$2y$10$chWNPRni/0iOEEpL0hk5b.d1ATaB8teyia013zF8gQ17gQUuM.KXO',0,0),(6,'Example','Example@gmail.com','$2y$10$5Cft3kv3wf7sY1hy7vOOg.nk9oQFUqhL7YsjPa87yeQhngw/z//UG',0,0),(7,'Latest','Late@gmailc.om','$2y$10$EHPNYPztnnV1ts.46OCLWeXtQeM45GOkphC.do7yutzjo1lLxtkt.',0,0),(8,'BobCat','bebnasknkn@iasihdoash.com','$2y$10$AKzF0Ei8kyQFMHIvD3yISeVBm7M2bsHhG8McsMP38scXy/9S2plDu',0,0),(9,'Bobby','ben@ai.org.aui','$2y$10$eJinqcz4XI2CiftN3pk1v.Qh2apoRQorsQpu2B4JgtChBfWySgOg6',1,1),(10,'George','george@gmail.com','$2y$10$31MSyC9mS.daI1lgGu7zbejwchulAtoK3.PZvx9lq4em62JmMgdTe',1,1),(11,'Duncan','duncan@gmail.com','$2y$10$dnodtKxSUG9z5anGNs.XhOz52z4nKzScGyMVEnEnzuoNAutrG/xiy',0,0),(12,'Douglas','Douglas@gmail.com','$2y$10$yxvhh//N8ibnho5Wjf2JMeDSnP7JPfVNhcmdJ48PEAfIVu7/mBesS',0,0),(13,'Greg','greg@gmail.com','$2y$10$0bjOjLMyGpOqn2Q4vjp5j.Nmm/IAdSiOUSoXCBVsYFyo39i5sVkNe',0,0);
+INSERT INTO `login_user` VALUES (1,'test_user','test@example.com','$2y$10$jkNhJjjnmJBemOPPusPdpun88MPN0sSZ8K5C4I9K2OOZsH0FnqY3i',1,1),(2,'Ben','ben@ai.org.au','$2y$10$p5MgzSC2HsIf/VNhlUYnQenU6TdN8OZcsPcfn14Pznlj8PIsPBCLS',0,0),(3,'username','user@ecample.com','$2y$10$6LuosqVB1q5oljg53uR1refcK4kFUy7iP8WmoJGY5f/brNb.N0Y5q',0,0),(4,'test1','test@exampl1.com','$2y$10$C3gzZeCayvlhAgbR59q3ceZZG7qovYc.JMTWzYHskceK0w3fDIaki',0,0),(5,'bob','bob@bob.com','$2y$10$chWNPRni/0iOEEpL0hk5b.d1ATaB8teyia013zF8gQ17gQUuM.KXO',0,0),(6,'Example','Example@gmail.com','$2y$10$5Cft3kv3wf7sY1hy7vOOg.nk9oQFUqhL7YsjPa87yeQhngw/z//UG',0,0),(7,'Latest','Late@gmailc.om','$2y$10$EHPNYPztnnV1ts.46OCLWeXtQeM45GOkphC.do7yutzjo1lLxtkt.',0,0),(8,'BobCat','bebnasknkn@iasihdoash.com','$2y$10$AKzF0Ei8kyQFMHIvD3yISeVBm7M2bsHhG8McsMP38scXy/9S2plDu',0,0),(9,'Bobby','ben@ai.org.aui','$2y$10$eJinqcz4XI2CiftN3pk1v.Qh2apoRQorsQpu2B4JgtChBfWySgOg6',1,1),(10,'George','george@gmail.com','$2y$10$31MSyC9mS.daI1lgGu7zbejwchulAtoK3.PZvx9lq4em62JmMgdTe',1,1),(11,'Duncan','duncan@gmail.com','$2y$10$dnodtKxSUG9z5anGNs.XhOz52z4nKzScGyMVEnEnzuoNAutrG/xiy',0,0),(12,'Douglas','Douglas@gmail.com','$2y$10$yxvhh//N8ibnho5Wjf2JMeDSnP7JPfVNhcmdJ48PEAfIVu7/mBesS',0,0),(13,'Greg','greg@gmail.com','$2y$10$0bjOjLMyGpOqn2Q4vjp5j.Nmm/IAdSiOUSoXCBVsYFyo39i5sVkNe',0,0);
 /*!40000 ALTER TABLE `login_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -316,4 +338,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-06 23:51:33
+-- Dump completed on 2019-03-07  0:19:06

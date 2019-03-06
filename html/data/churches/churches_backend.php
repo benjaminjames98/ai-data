@@ -1,6 +1,8 @@
 <?php
 include_once "../../../includes/db_connect.php";
 
+// TODO restrict this to only regions what the user has access to
+
 function throwError($msg = '') {
   die(json_encode(["a" => "0", "msg" => "error in: " . $msg]));
 }
